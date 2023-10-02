@@ -120,8 +120,8 @@ if __name__ == "__main__":
     df_full, df, df_test = load_data('data_daily.csv')
     
     param_grid = {
-    'lr': [0.001, 0.01, 0.1],
-    'num_iterations': [1000, 5000, 10000],
+    'lr': [0.001, 0.005, 0.01, 0.015, 0.1],
+    'num_iterations': [1000, 3000 ,5000, 7000, 10000],
     'momentum': [0.5, 0.7, 0.9]
     }
     

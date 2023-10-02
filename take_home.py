@@ -74,19 +74,19 @@ def plot_df(x, y, title = "", xlabel = 'Month', ylabel = 'Total receipt in month
     plt.figure(figsize=(6,5), dpi = dpi)
     plt.plot(x, y, color='red')
     plt.gca().set(title = title, xlabel=xlabel, ylabel=ylabel)
-    plt.show()
+    return plot_to_base64()
     
 def PlotAcf(data_series):
     #print(acf(data_series, nlags = 6))
     plot_acf(data_series, lags = 6)
     plt.title('ACF Plot')
-    plt.show()
+    return plot_to_base64()
     
 def Plot_Pafc(data_series):
     #print(pacf(data_series, nlags = 4))
     plot_pacf(data_series, lags = 4)
     plt.title('PACF Plot')
-    plt.show()
+    return plot_to_base64()
 
 def train_evaluate_model(train_df, test_df, lr = 0.01, num_iterations = 5000, momentum = 0.9):
     model = Arima_module()
@@ -139,17 +139,17 @@ if __name__ == "__main__":
                         best_params = best_model.params()
     
     #Plot 2021          
-    plot_df(x=df_full['Month'].values, y= df_full['Receipt_Count'].values, title='Monthly receipts count in 2021')
+    #plot_df(x=df_full['Month'].values, y= df_full['Receipt_Count'].values, title='Monthly receipts count in 2021')
     #Plot 2022
     values = best_model.predict_2022(torch.tensor(df_full['Receipt_Count'].values, dtype = torch.float32))
-    plot_df(x=df_full['Month'].values, y= values, title='Monthly receipts count in 2022')
+    #plot_df(x=df_full['Month'].values, y= values, title='Monthly receipts count in 2022')
     
     data_series = df_full['Receipt_Count']
     train_after_diff = data_series.diff().dropna().values
     #Plot ACF
-    PlotAcf(train_after_diff)
+    #PlotAcf(train_after_diff)
     #Plot PACF
-    Plot_Pafc(train_after_diff)
+    #Plot_Pafc(train_after_diff)
     
     np.save('predicted_values.npy', values)
     torch.save(best_model.state_dict(), 'best_model.pth')

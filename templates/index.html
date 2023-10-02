@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Prediction</title>
+</head>
+<body>
+    <h2>Enter Month Number (1-12)</h2>
+    <form action="/predict" method="post">
+        <input type="number" name="month_number" min="1" max="12" required>
+        <br><br>
+        <input type="submit" value="Get Prediction">
+    </form>
+</body>
+</html>
